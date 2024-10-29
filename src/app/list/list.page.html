@@ -1,0 +1,87 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>list</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <style>
+    ion-button {
+      margin-left: 5px;
+    }
+  </style>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">list</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header> -->
+
+  <ion-list lines="full">
+    <ion-item>
+      <ion-text>
+        Product List per {{today_ind()}} <!--interpolation binding -->
+      </ion-text>
+      <!--event binding -->
+      <ion-button size="small" (click)="goYesterday()" [disabled]="disabledButton">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button size="small" (click)="resetDay()">
+        <ion-icon name="repeat-outline"></ion-icon>
+      </ion-button>
+
+      <!-- property binding -->
+      <ion-button size="small" (click)="goTomorrow()" [disabled]="disabledButtonAdd">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+  </ion-list>
+  <ion-list lines="full">
+    <ion-item>
+      <ion-text>
+        Product Name <b>{{product.productName}}</b>
+      </ion-text>
+    </ion-item>
+  </ion-list>
+  <ion-list lines="full">
+    <ion-item>
+      <ion-text>
+        Product Price <b>Rp {{product.productPrice}}</b>
+      </ion-text>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-text> <!-- ; buat nambahin method pada click jadi bisa 2 method yg di pake -->
+        Quantity
+        <ion-button (click)="minQuan();calcPrice()">
+          <ion-icon name="remove-outline" ></ion-icon>
+        </ion-button>
+        {{quantity}}
+        <ion-button (click)="addQuan();calcPrice()">
+          <ion-icon name="add-outline" ></ion-icon>
+        </ion-button>
+      </ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item>
+      <ion-text>
+        Total Amount <b>Rp {{totalPrice}}</b>
+      </ion-text>
+    </ion-item>
+  </ion-list>
+  <!-- accordion  -->
+  
+
+
+
+</ion-content>

@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>setting</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">setting</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-item>
+    <ion-input labelPlacement="floating" label="Masukkan url gambar : " [(ngModel)]="linkPic" > </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-img [src]="linkPic">
+    </ion-img>
+  </ion-item>
+  <ion-item>
+    <ion-input labelPlacement="floating" label="Masukkan password: " [(ngModel)]="password" (keyup)="checkPassword()"> </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-checkbox [checked]="wordCheck" disabled="true">More than 6 characters</ion-checkbox>
+  </ion-item>
+  <ion-item>
+    <ion-checkbox [checked]="numberCheck" disabled="true">include number</ion-checkbox>
+  </ion-item>
+  <ion-item>
+    <ion-checkbox [checked]="specialCheck" disabled="true">include Special characters</ion-checkbox>
+  </ion-item>
+</ion-content>

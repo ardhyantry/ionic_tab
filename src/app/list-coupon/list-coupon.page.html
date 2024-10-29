@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>listCoupon</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">listCoupon</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-item>
+    <ion-input labelPlacement="floating" label="Masukkan kode : " [(ngModel)]="couponcode" (keyup)="checkValid()">
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <span [ngStyle]="{'color':textcolor}">
+      Coupon code {{couponcode}} is {{strvalid}} you get {{discount}}% discount
+    </span>
+  </ion-item>
+  <ion-item>
+    <ion-img *ngIf="strvalid=='Valid'"
+      src="https://www.animatedimages.org/data/media/1103/animated-congratulation-image-0092.gif"></ion-img>
+  </ion-item>
+  <ion-item>
+    <ion-text>
+      Product List per {{today_ind()}} <!--interpolation binding -->
+    </ion-text>
+    <!--event binding -->
+    <ion-button size="small" (click)="goYesterday()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button size="small" (click)="resetDay()">
+      <ion-icon name="repeat-outline"></ion-icon>
+    </ion-button>
+
+    <!-- property binding -->
+    <ion-button size="small" (click)="goTomorrow()">
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <ion-list *ngFor="let book of books">
+    <ion-list-header>
+      <ion-label>
+        <h1>{{book.title}}</h1>
+      </ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Author : {{book.author}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Discount : {{book.discounts}}%</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label *ngIf="book.discounts> 0">
+        <span style="text-decoration: line-through;">Price: ${{book.price}}</span>
+      </ion-label>
+      <ion-label *ngIf="book.discounts <=0">
+        <span>Price:${{book.price}}</span>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="book.discounts >0" >
+      <span [ngStyle]="{'text-decoration':styleText}">
+        Price after Discount = ${{applyDiscount(book)}}
+      </span>
+    </ion-item>
+    <ion-item *ngIf="discount>0">
+      <ion-text>
+        Price after coupon discount : ${{applyDiscountCode(book)}}
+      </ion-text>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

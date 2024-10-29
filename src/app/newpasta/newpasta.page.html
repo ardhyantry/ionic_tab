@@ -1,0 +1,80 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>newpasta</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+   </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">newpasta</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list>
+    <ion-item>
+      <ion-input
+        label="Name"
+        labelPlacement="stacked"
+        placeholder="Enter Pasta Name"
+        [(ngModel)]="new_name"
+      >
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea
+        label="Description"
+        labelPlacement="stacked"
+        rows="3"
+        [(ngModel)]="new_desc"
+        placeholder="Enter Description"
+      ></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-select
+        label="Price"
+        labelPlacement="stacked"
+        placeholder="Select Price"
+        [(ngModel)]="new_price"
+      >
+        <ion-select-option *ngFor="let price of arr_price" value="{{price}}">
+          {{price}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        label="Image"
+        labelPlacement="stacked"
+        placeholder="Enter Image URL"
+        [(ngModel)]="new_url"
+      ></ion-input>
+      <ion-img [src]="new_url" style="width: 100px"></ion-img>
+    </ion-item>
+
+    <ion-item>
+      <ion-checkbox labelPlacement="start" [(ngModel)]="new_spicy">
+        Spicy
+      </ion-checkbox>
+    </ion-item>
+
+    <!-- <ion-button id="present-alert">Click Me</ion-button>
+    <ion-alert
+      trigger="present-alert"
+      header="Alert"
+      subHeader="Important message"
+      message="This is an alert!"
+      [buttons]="alertButtons"
+    ></ion-alert> -->
+  </ion-list>
+  <ion-button id="btnsubmit" expand="block" (click)="submitpasta()"
+    >Submit</ion-button>
+  <ion-alert
+    trigger="btnsubmit"
+    header="Add Pasta"
+    message="Data Succesfully stored"
+    [buttons]="alertButtons"
+  ></ion-alert>
+</ion-content>

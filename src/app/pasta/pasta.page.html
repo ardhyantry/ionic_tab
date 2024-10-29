@@ -1,0 +1,90 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Pasta</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="solid" color="secondary" routerLink="/newpasta">
+        Add Pasta
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Pasta</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-searchbar animated="true" placeholder="Search" (ionInput)="onSearchChange($event)"></ion-searchbar>
+
+  <ion-segment [(ngModel)]="jenistampilan">
+    <ion-segment-button value="accordion">
+      <ion-label>Accordion</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="card">
+      <ion-label>Card</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="grid">
+      <ion-label>Grid</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-accordion-group *ngIf="jenistampilan == 'accordion'" expand="inset">
+    <ion-accordion *ngFor="let pasta of filtered">
+      <ion-item slot="header" color="tertiary">
+        <ion-label>{{ pasta.name }}</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item>
+            <ion-img [src]="pasta.url"></ion-img>
+          </ion-item>
+          <ion-item>
+            <ion-label>{{ pasta.description }}</ion-label>
+            <ion-badge color="danger" *ngIf="pasta.spicy">Spicy</ion-badge>
+          </ion-item>
+          <ion-item>
+            <ion-label>{{ pasta.price  }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <ng-container *ngIf="jenistampilan == 'card'">
+    <ion-card *ngFor="let pasta of filtered" color="danger">
+      <ion-card-header>
+        <ion-img [src]="pasta.url"></ion-img>
+        <ion-title>{{ pasta.name }}</ion-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-label>{{ pasta.description }}</ion-label> <br />
+        <ion-label>{{ pasta.price }}</ion-label>
+        <ion-item *ngIf="pasta.spicy">
+          <ion-badge color="danger">Spicy</ion-badge>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ng-container *ngIf="jenistampilan == 'grid'">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor="let pasta of filtered">
+          <ion-list>
+            <ion-item>
+              <ion-img [src]="pasta.url"></ion-img>
+            </ion-item>
+            <ion-item routerLink="/pastadetail/{{pasta.id}}">
+              <ion-label color="warning">{{ pasta.name }}</ion-label>
+              <ion-badge color="danger" *ngIf="pasta.spicy">Spicy</ion-badge>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
+</ion-content>
